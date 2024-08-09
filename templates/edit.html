@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Transaction</title>
+</head>
+<body>
+    <h1>Edit Transaction</h1>
+    <form action="{{ url_for('edit', id=transaction.id) }}" method="post">
+        <label for="date">Date:</label>
+        <input type="date" name="date" id="date" value="{{ transaction.date }}" required><br>
+
+        <label for="category">Category:</label>
+        <select name="category" id="category">
+            <option value="Groceries" {% if transaction.category == 'Groceries' %}selected{% endif %}>Groceries</option>
+            <option value="Utilities" {% if transaction.category == 'Utilities' %}selected{% endif %}>Utilities</option>
+            <option value="Rent" {% if transaction.category == 'Rent' %}selected{% endif %}>Rent</option>
+            <option value="Salary" {% if transaction.category == 'Salary' %}selected{% endif %}>Salary</option>
+            <option value="Misc" {% if transaction.category == 'Misc' %}selected{% endif %}>Misc</option>
+        </select><br>
+
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" id="amount" value="{{ transaction.amount }}" step="0.01" required><br>
+
+        <label>Type:</label>
+        <input type="radio" name="type" value="expense" {% if transaction.type == 'expense' %}checked{% endif %}> Expense
+        <input type="radio" name="type" value="income" {% if transaction.type == 'income' %}checked{% endif %}> Income<br>
+
+        <input type="submit" value="Update Transaction">
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>

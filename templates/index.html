@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Manager</title>
+    <style>
+        /* Basic styling for the dialog box */
+        #transaction-dialog {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-color: white;
+            z-index: 1000;
+        }
+        #dialog-overlay {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <h1>Personal Finance Manager</h1>
+    <table border="1">
+        <tr>
+            <th>Date</th>
+            <th>Category</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Actions</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction.date }}</td>
+            <td>{{ transaction.category }}</td>
+            <td>{{ transaction.amount }}</td>
+            <td>{{ transaction.type }}</td>
+            <td>
+                <button onclick="showTransactionDialog({{ transaction.id }}, '{{ transaction.date }}', '{{ transaction.category }}', {{ transaction.amount }}, '{{ transaction.type }}')">View</button>
+                <form action="{{ url_for('delete', id=transaction.id) }}" method="post" style="display:inline;">
+                    <button type="submit">Delete</button>
+                </form>
+                <a href="{{ url_for('edit', id=transaction.id) }}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/add">Add New Transaction</a>
+
+    <div id="dialog-overlay"></div>
+    <div id="transaction-dialog">
+        <h3>Transaction Details</h3>
+        <p id="transaction-details"></p>
+        <button onclick="closeTransactionDialog()">Close</button>
+    </div>
+
+    <script>
+        function showTransactionDialog(id, date, category, amount, type) {
+            const dialog = document.getElementById('transaction-dialog');
+            const overlay = document.getElementById('dialog-overlay');
+            const details = document.getElementById('transaction-details');
+
+            details.innerHTML = `
+                <strong>Date:</strong> ${date}<br>
+                <strong>Category:</strong> ${category}<br>
+                <strong>Amount:</strong> $${amount}<br>
+                <strong>Type:</strong> ${type}<br>
+            `;
+
+            dialog.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        function closeTransactionDialog() {
+            document.getElementById('transaction-dialog').style.display = 'none';
+            document.getElementById('dialog-overlay').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
