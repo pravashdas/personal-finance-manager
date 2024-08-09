@@ -23,6 +23,13 @@ Follow these steps to set up the project locally.
 - **Python 3.x**: Ensure Python is installed on your system. Download it from [python.org](https://www.python.org/).
 - **SQLite**: Comes pre-installed with Python, but you can get more info [here](https://www.sqlite.org/index.html).
 
+### If you are using TERMUX on Android then use these command for installing Python and SQLite  
+```bash
+pkg update && pkg upgrade
+```
+```bash
+pkg install python sqlite
+```
 ### Clone the Repository
 
 Clone the repository to your local machine using the following command:
@@ -34,17 +41,31 @@ cd personal-finance-manager
 ```
 
 ### Dependencies Installation
-`pip install -r requirements.txt`
+```bash 
+pip install -r requirements.txt
+```
+
 
 ### Database Setup
-`sqlite3 finance.db < schema.sql`
+``` bash 
+sqlite3 finance.db < schema.sql
+```
+
+### Give the Permission before run the Application
+```bash 
+chmod +x run_app.sh
+```
 
 ### Running the Application
-`./run_app.sh`
+```bash 
+./run_app.sh
+```
 
 ### Alternatively, you can manually set the environment variable and start the Flask server:
-`export FLASK_APP=app.py
-flask run --host=0.0.0.0`
+```bash 
+export FLASK_APP=app.py
+flask run --host=0.0.0.0
+```
 
 ### Access the application in your web browser at
 `http://localhost:5000`
