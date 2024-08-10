@@ -14,7 +14,7 @@ A simple web application for managing personal finances. Track your expenses and
 - **Backend:** Python (Flask)
 - **Database:** SQLite
 
-## Installation
+## Installation For Termux(Android) and Debian based OS
 
 Follow these steps to set up the project locally.
 
@@ -45,12 +45,6 @@ cd personal-finance-manager
 pip install -r requirements.txt
 ```
 
-
-### Database Setup
-``` bash 
-sqlite3 finance.db < schema.sql
-```
-
 ### Give the Permission before run the Application
 ```bash 
 chmod +x run_app.sh
@@ -62,10 +56,49 @@ chmod +x run_app.sh
 ```
 
 ### Alternatively, you can manually set the environment variable and start the Flask server:
-```bash 
-export FLASK_APP=app.py
-flask run --host=0.0.0.0
+ 
+`export FLASK_APP=app.py`
+`flask run --host=0.0.0.0`
+
+
+### Access the application in your web browser at
+`http://localhost:5000`
+
+## Instructions for Debian-based Systems
+### Update the Package List and Upgrade Installed Packages
+```bash
+sudo apt update && sudo apt upgrade
 ```
+
+### Install Python and SQLite
+```bash
+sudo apt install python3 sqlite3
+```
+
+### Clone the Repository
+```bash
+git clone https://github.com/pravashdas/personal-finance-manager.git
+```
+```bash
+cd personal-finance-manager
+```
+
+### Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+### Give Permission to Run the Application
+```bash
+chmod +x run_app.sh
+```
+
+### Running the Application
+```bash
+./run_app.sh
+```
+### Alternatively, you can manually set the environment variable and start the Flask server:
+`export FLASK_APP=app.py`
+`flask run --host=0.0.0.0`
 
 ### Access the application in your web browser at
 `http://localhost:5000`
